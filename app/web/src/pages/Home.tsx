@@ -1,6 +1,7 @@
 import { useForm, SubmitHandler } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import styles from './Home.module.css'
 
 const InputSchema = z.object({
   input: z.string().min(3, { message: 'Required min 3 letters' })
@@ -16,7 +17,7 @@ export default function Home() {
   }
 
   return (
-    <main>
+    <main className={styles.container}>
       <h2>To Do</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="input_id">
@@ -27,6 +28,7 @@ export default function Home() {
             { ...register('input') }
           />
         </label>
+        <button type='submit'>Added</button>
       </form>
     </main>
   )
