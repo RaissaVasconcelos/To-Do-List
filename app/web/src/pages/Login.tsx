@@ -1,13 +1,19 @@
 import { useForm, SubmitHandler } from 'react-hook-form'
+import * as z from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod';
 import styles from './Login.module.css'
 
-interface Inputs {
-  user: String,
-  password: String,
-};
+const InputSchema = z.object({
+  user: z.string().min(3, { message: 'Required min 3 letters' }),
+  password: z.string().min(3, { message: 'Required min 3 letters' })
+})
+
+type Inputs = z.infer<typeof InputSchema>
 
 export default function Login() {
-  const { register, handleSubmit } = useForm<Inputs>();
+  const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({
+    resolver: zodResolver(InputSchema),
+  });
 
   const handleLogin: SubmitHandler<Inputs> = (data) => {
     console.log(data);
@@ -26,6 +32,7 @@ export default function Login() {
               required
               {...register('user')}
             />
+            {errors.user?.message && <p>{errors.user?.message}</p>}
           </label>
           <label htmlFor='id_password' className={styles.input_single}>
             <input
@@ -35,6 +42,7 @@ export default function Login() {
               required
               {...register('password')}
             />
+            {errors.password?.message && <p>{errors.password?.message}</p>}
           </label>
           <button type='submit' className={styles.button}>Send</button>
         </form>
