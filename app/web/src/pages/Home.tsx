@@ -32,17 +32,19 @@ export default function Home() {
           />
         </label>
         <button type='submit'>Added</button>
+        <br></br>
+        { todo.map((task) => (
+          <label htmlFor={task}>
+            <input
+              type='checkbox'
+              id={task}
+              value={task}
+            />
+          {task}
+          </label>
+        )) }
+        <br></br>
       </form>
-      <br></br>
-      <nav>
-        <ul>
-          {
-            todo.map((task) => (
-              <li>{ task }</li>
-            ))
-          }
-        </ul>
-      </nav>
     </main>
   )
 }
