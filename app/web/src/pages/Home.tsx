@@ -1,7 +1,8 @@
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import Task from '../Componentes/Task'
 import styles from './Home.module.css'
 
 const InputSchema = z.object({
@@ -19,7 +20,6 @@ export default function Home() {
   }
 
   const deleteTask = (task: string) => {
-    console.log(task)
     const arr = todo.filter((item) => item !== task)
     setTodo(arr)
   }
@@ -44,23 +44,21 @@ export default function Home() {
         </label>
         <button type='submit'>Added</button>
         <br></br>
-        { todo.map((task) => (
-          <>
-            <label htmlFor={task} key={task}>
-              <input
-                type='checkbox'
-                id={task}
-                value={task}
-              />
-            {task}
-            </label>
+        { todo.map((task, index) => (
+          <div
+            key={ index }
+          >
+            <Task
+              task={ task }
+              id={ index }  
+            />
             <button
               onClick={() => deleteTask(task)}
             >
               Delete
             </button>
             <br />
-          </>
+          </div>
         )) }
         <br></br>
       </form>
