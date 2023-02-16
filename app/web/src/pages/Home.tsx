@@ -11,12 +11,23 @@ const InputSchema = z.object({
 type Input = z.infer<typeof InputSchema>
 
 export default function Home() {
-  const { register, handleSubmit } = useForm<Input>({ resolver: zodResolver(InputSchema) })
+  const { register, handleSubmit, reset } = useForm<Input>({ resolver: zodResolver(InputSchema) })
   const [todo, setTodo] = useState(['correr'])
+
+  const addTask = (task: string) => {
+    setTodo([...todo, task])
+  }
+
+  const deleteTask = (task: string) => {
+    console.log(task)
+    const arr = todo.filter((item) => item !== task)
+    setTodo(arr)
+  }
 
   const onSubmit: SubmitHandler<Input> = (data: Input) =>  {
     const { input } = data
-    setTodo([...todo, input])
+    addTask(input)
+    reset({ input: '' })
   }
 
   return (
@@ -34,14 +45,22 @@ export default function Home() {
         <button type='submit'>Added</button>
         <br></br>
         { todo.map((task) => (
-          <label htmlFor={task}>
-            <input
-              type='checkbox'
-              id={task}
-              value={task}
-            />
-          {task}
-          </label>
+          <>
+            <label htmlFor={task} key={task}>
+              <input
+                type='checkbox'
+                id={task}
+                value={task}
+              />
+            {task}
+            </label>
+            <button
+              onClick={() => deleteTask(task)}
+            >
+              Delete
+            </button>
+            <br />
+          </>
         )) }
         <br></br>
       </form>
