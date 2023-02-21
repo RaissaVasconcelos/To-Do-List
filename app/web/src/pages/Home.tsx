@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Task from '../Componentes/Task'
@@ -51,11 +51,20 @@ export default function Home() {
     setTask(arrChecks)
   }
 
+  const tasksCompleted = () => {
+    const arrCompleted = task.filter((item) => item.completed === true).length
+    return arrCompleted;
+  }
+
   const onSubmit: SubmitHandler<Input> = (data: Input) =>  {
     const { input } = data
     addTask(input)
     reset({ input: '' })
   }
+
+  useEffect(() => {
+    tasksCompleted()
+  }, [task])
 
   return (
     <main className={styles.container}>
@@ -75,7 +84,7 @@ export default function Home() {
       </section>
       <section>
       <p>Tarefas Criadas {task.length} </p>
-      <p>Tarefas Concluidas </p>
+      <p>Tarefas Concluidas {tasksCompleted()} / {task.length}</p>
       { task.length > 0 ? (
        <div>
         { task.map((task) => (
