@@ -1,30 +1,33 @@
-import { useState } from "react"
-
-type Props = {
-  id: number
-  task: string
+// import { useState } from "react"
+interface TaskInterface {
+  id: number;
+  task: string;
+  completed: boolean;
 }
 
+type Props = {
+  todo: TaskInterface
+  onCompleteTask: (id: number) => void
+}
 
-export default function Task({ id, task }: Props) {
-  const [check, setCheck] = useState(false)
+export default function Task({ todo, onCompleteTask }: Props) {
 
-  const handleCompleteTask = () => {
-    setCheck(!check)
+  const handleCheck = () => {
+    onCompleteTask(todo.id)
   }
 
   return (
     <label
-      htmlFor={`checkbox - ${id}`}
-      key={id}>
+      htmlFor={`checkbox - ${todo.id}`}
+      key={todo.id}>
         <input
           type='checkbox'
-          id={`checkbox - ${id}`}
-          value={task}
-          checked={check}
-          onChange={handleCompleteTask}
+          id={String(todo.id)}
+          value={todo.task}
+          checked={todo.completed}
+          onChange={handleCheck}
         />
-      {task}
+      {todo.task}
     </label>
   )
 }
