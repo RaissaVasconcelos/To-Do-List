@@ -29,9 +29,7 @@ export default function Home() {
       task: input,
       completed: false
     }
-
     setTask([...task, newTask])
-    console.log(task);
   }
 
   const completedTask = (id: number) => {
@@ -45,15 +43,13 @@ export default function Home() {
       }
       return true
     })
-    console.log(arrChecks);
     setTask(arrChecks)
   }
 
-  // const deleteTask = (task: any) => {
-  //   console.log(task);
-  //   const arr = todo.filter((item) => item !== task)
-  //   setTodo(arr)
-  // }
+  const deleteTask = (id: number) => {
+    const arrChecks = task.filter((item) => item.id !== id)
+    setTask(arrChecks)
+  }
 
   const onSubmit: SubmitHandler<Input> = (data: Input) =>  {
     const { input } = data
@@ -87,6 +83,7 @@ export default function Home() {
           key={task.id}
           todo={task}
           onCompleteTask={completedTask}
+          onDeleteTask={deleteTask}
           />
         )) }
        </div>
