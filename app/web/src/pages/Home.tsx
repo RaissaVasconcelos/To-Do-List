@@ -4,6 +4,7 @@ import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Task from '../Componentes/Task'
 import styles from './Home.module.css'
+import { Header } from '../Componentes/Header'
 
 const InputSchema = z.object({
   input: z.string().min(3, { message: 'Required min 3 letters' })
@@ -68,6 +69,7 @@ export default function Home() {
 
   return (
     <main className={styles.container}>
+      <Header />
       <section>
         <h2>To Do</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -96,7 +98,7 @@ export default function Home() {
           />
         )) }
        </div>
-      ) : <p>Nada</p> }
+      ) : <p>Você não tem tarefas cadastradas</p> }
       </section>
     </main>
   )
