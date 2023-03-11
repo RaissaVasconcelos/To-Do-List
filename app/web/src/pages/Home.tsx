@@ -21,7 +21,10 @@ const TaskSchema = z.object({
 type TaskI = z.infer<typeof TaskSchema>
 
 export default function Home() {
-  const { register, handleSubmit, reset } = useForm<Input>({ resolver: zodResolver(InputSchema) })
+  const { register, handleSubmit, reset } = useForm<Input>({
+    resolver: zodResolver(InputSchema)
+  })
+
   const [task, setTask] = useState<TaskI[]>([])
 
   const addTask = (input: string) => {
@@ -70,19 +73,20 @@ export default function Home() {
   return (
     <main className={styles.container}>
       <Header />
-      <section>
-        <h2>To Do</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <label htmlFor="input_id">
-            <input
-              type='text'
-              placeholder='Adicionar uma nova tarefa'
-              id='input_id'
-              { ...register('input') }
-            />
-          </label>
-          <button type='submit'>Added</button>
-        </form>
+      <section className={styles.section}>
+        <div className={styles.form}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <label htmlFor="input_id" className={styles.input_single} >
+              <input
+                type='text'
+                placeholder='Adicionar uma nova tarefa'
+                id='input_id'
+                { ...register('input') }
+              />
+            </label>
+          </form>
+        </div>
+        <button type='submit' className={styles.button} >Criar</button>
       </section>
       <section>
       <p>Tarefas Criadas {task.length} </p>
