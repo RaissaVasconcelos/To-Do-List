@@ -1,9 +1,9 @@
-import style from './Header.module.css'
+import { Content, Image } from './Header.style'
 
 export function Header() {
   return(
-    <header className={style.content}>
-      <img className={style.logo} src="../../public/Logo.svg" alt="Logo ToDo"/>
-    </header>
+    <Content>
+      <Image src="../../public/Logo.svg" alt="Logo ToDo"/>
+    </Content>
   )
 }

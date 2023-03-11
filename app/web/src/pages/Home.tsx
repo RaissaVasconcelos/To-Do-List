@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Task from '../Componentes/Task'
-import styles from './Home.module.css'
+import { Container, Button, Section } from './Home.style'
 import { Header } from '../Componentes/Header'
 
 const InputSchema = z.object({
@@ -71,12 +71,12 @@ export default function Home() {
   }, [task])
 
   return (
-    <main className={styles.container}>
+    <Container>
       <Header />
-      <section className={styles.section}>
-        <div className={styles.form}>
+      <Section>
+        <div>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <label htmlFor="input_id" className={styles.input_single} >
+            <label htmlFor="input_id">
               <input
                 type='text'
                 placeholder='Adicionar uma nova tarefa'
@@ -86,8 +86,8 @@ export default function Home() {
             </label>
           </form>
         </div>
-        <button type='submit' className={styles.button} >Criar</button>
-      </section>
+        <Button type='submit'>Criar</Button>
+      </Section>
       <section>
       <p>Tarefas Criadas {task.length} </p>
       <p>Tarefas Concluidas {tasksCompleted()} / {task.length}</p>
@@ -104,6 +104,6 @@ export default function Home() {
        </div>
       ) : <p>Você não tem tarefas cadastradas</p> }
       </section>
-    </main>
+    </Container>
   )
 }

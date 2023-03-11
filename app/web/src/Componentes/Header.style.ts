@@ -1,4 +1,6 @@
-.content {
+import styled from "styled-components"
+
+export const Content = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,10 +11,10 @@
   left: 0px;
   right: 0px;
   top: 0px;
-}
+`
 
-.logo {
+export const Image = styled.img`
   position: absolute;
   width: 126px;
   height: 48px;
-}
+`

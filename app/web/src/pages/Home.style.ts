@@ -1,13 +1,15 @@
-.container {
+import styled from "styled-components"
+
+export const Container = styled.main`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
   width: vw;
-}
+`
 
-.section {
+export const Section = styled.section`
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
@@ -17,24 +19,24 @@
   height: 4rem;
   position: absolute;
   top: 240px;
-}
+`
 
-.form {
+export const Form = styled.form`
   width: 70%;
   border: 1px solid rgb(241, 5, 5);
   margin: 10px;
-}
+`
 
-.input_single input {
+export const InputText = styled.input`
   cursor: text;
   font-size: 1rem;
   padding: 0.8rem;
   font-weight: bold;
   border-radius: 8px;
   width: 100%;
-}
+`
 
-.button {
+export const Button = styled.button`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -47,4 +49,4 @@
   border: 1px solid #eee;
   border-radius: 8px;
   box-shadow: 5px 5px 5px #eee;
-}
+`
